@@ -1,4 +1,10 @@
 [
-    "your daddy said he was going to buy some milk", 
-    "your daddy never showed up again"
+    {
+        "todo":"study jest",
+        "proirity": "high"
+    },
+    {
+        "todo":"buy milk",
+        "proirity": "must do"
+    }
 ]

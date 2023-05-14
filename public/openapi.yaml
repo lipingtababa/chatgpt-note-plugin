@@ -25,5 +25,10 @@ components:
         todos:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              todo:
+                type: string
+              priority:
+                type: string
           description: The list of todos.
