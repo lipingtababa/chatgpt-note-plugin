@@ -26,9 +26,4 @@ components:
           type: array
           items:
             type: object
-            properties:
-              todo:
-                type: string
-              priority:
-                type: string
           description: The list of todos.
