@@ -21,4 +21,9 @@ components:
   schemas:
     getTodosResponse:
       type: object
+      properties:
+        todos:
+          type: array
+          items:
+            type: object
           description: The list of todos.
