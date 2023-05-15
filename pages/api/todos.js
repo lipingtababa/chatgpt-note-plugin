@@ -53,7 +53,7 @@ async function handleGet(req, res) {
     res.status(200).json(data || [] );
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ error: 'Error occurred while fetching file from S3' });
+    res.status(error.statusCode ?? 500).json(error.toString());
   }
 }
 
