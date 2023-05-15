@@ -10,11 +10,13 @@ const s3 = new AWS.S3({
 });
 
 const params = {
-  Bucket: process.env.TODOS_BUCKET,
-  Key: process.env.TODOS_KEY
+  Bucket: process.env.TODOS_BUCKET ?? 'us-east-1-temp-ma',
+  Key: process.env.TODOS_KEY ?? 'chatgpt-plugin/todo-list/todo-list.json'
 };
 
 export default async function handler(req, res) {
+  console.log(process.env.TODOS_BUCKET);
+
   // handle GET request
   if (req.method === 'GET') {
     return handleGet(req, res);
@@ -41,12 +43,13 @@ export default async function handler(req, res) {
 
 async function handleGet(req, res) {
   try {
+    console.log(params);
     const file = await s3.getObject(params).promise();
     const fileContent = file.Body.toString('utf-8'); 
     let data = JSON.parse(fileContent);
 
     // return all todos or a specific todo
-    if (req.query.id) {
+    if (req.query?.id) {
       const targetID = Number(req.query.id);
       data = data.find(todo => todo.id === targetID);
     }
