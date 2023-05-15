@@ -88,7 +88,6 @@ async function handlePut(req, res) {
     // save updated todo list to S3 and return to client
     const uploadedParams = Object.assign({}, params, {Body: JSON.stringify(updatedData)});
     await s3.putObject(uploadedParams).promise();
-    console.log(updatedData)
     res.status(200).json(updatedData || [] );
   } catch (error) {
     console.error('Error:', error);
@@ -134,7 +133,6 @@ async function handleDelete(req, res) {
     }
     const targetID = Number(req.query.id);
 
-    console.log(targetID)
     const file = await s3.getObject(params).promise();
     const fileContent = file.Body.toString('utf-8'); 
     const data = JSON.parse(fileContent);
