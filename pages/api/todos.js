@@ -103,13 +103,14 @@ async function handlePost(req, res) {
       error.statusCode = 400;
       throw error;
     }
-    req.body.id = data.length + 1;
 
     const file = await s3.getObject(params).promise();
     const fileContent = file.Body.toString('utf-8'); 
     const data = JSON.parse(fileContent);
 
-    // add new todo to the list
+    // add new todo to the list with maxid + 1
+    const maxID = data.reduce((max, todo) => Math.max(max, todo.id), 0);
+    req.body.id = maxID + 1;
     data.push(req.body);
 
     // save updated todo list to S3
