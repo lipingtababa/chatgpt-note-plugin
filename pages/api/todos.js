@@ -15,8 +15,6 @@ const params = {
 };
 
 export default async function handler(req, res) {
-  console.log(process.env.TODOS_BUCKET);
-
   // handle GET request
   if (req.method === 'GET') {
     return handleGet(req, res);
