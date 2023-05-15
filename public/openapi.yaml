@@ -83,18 +83,30 @@ components:
         todos:
           type: array
           items:
-            $ref: '#/components/schemas/todo'
+            type: object
+            description: A todo
+            properties:
+              id:
+                type: number
+              msg:
+                type: string
+              priority:
+                type: string
     addTodoRequest:
-      $ref: '#/components/schemas/todo'
+      type: object
+      description: A todo
+      properties:
+        msg:
+          type: string
+        priority:
+          type: string
     updateTodoRequest:
-      $ref: '#/components/schemas/todo'
-    todo:
       type: object
       description: A todo
       properties:
         id:
           type: number
-          description: required when deleting or updating a todo
+          required: true
         msg:
           type: string
         priority:
