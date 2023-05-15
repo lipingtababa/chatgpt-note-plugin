@@ -9,10 +9,10 @@
     },
     "api": {
         "type": "openapi",
-        "url": "https://whatisvercelanyway.vercel.app/openapi.yaml",
+        "url": "https://magong.se/openapi.yaml",
         "is_user_authenticated": false
     },
-    "logo_url": "https://whatisvercelanyway.vercel.app/logo.png",
+    "logo_url": "https://magong.se/logo.png",
     "contact_email": "support@magong.se",
-    "legal_info_url": "https://whatisvercelanyway.vercel.app/legal.md"
+    "legal_info_url": "https://magong.se/legal.md"
 }
