@@ -19,9 +19,11 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - run: pwd
       - run: yarn install
-      - run: yarn format
+      - run: pwd && ls -la
+      - name: prettier
+        run: yarn format
+      - run: pwd && ls -la
       - run: yarn build
       - run: yarn test
       - run: echo "🍏 This job's status is ${{ job.status }}."
