@@ -1,20 +1,26 @@
 {
   "private": true,
   "license": "MIT",
+  "type": "commonjs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier --write '**/*.js'",
+    "format": "prettier --write '**/*.{ts,js}' && eslint --fix '**/*.{ts,js}' ",
+    "test": "jest",
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.22.4",
     "@types/node": "^20.1.4",
     "aws-sdk": "^2.1089.0",
     "gray-matter": "^4.0.2",
+    "jest": "^27.4.7",
+    "jest-mock-extended": "^3.0.4",
     "next": "12.0.8",
     "nextra": "^2.0.0-beta.5",
     "react": "^17.0.2",
+    "joi": "^17.9.2",
     "react-dom": "^17.0.2"
   },
   "prettier": {
@@ -25,6 +31,8 @@
     "semi": false
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.21.5",
+    "@types/jest": "^29.5.1",
     "@types/react": "18.0.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
