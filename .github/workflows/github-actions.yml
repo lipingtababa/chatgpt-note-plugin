@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Build and test on push
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
@@ -18,4 +18,12 @@ jobs:
       - run: pwd
       - run: yarn format
       - run: yarn test
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pwd
+      - run: yarn install
+      - run: yarn format
+      - run: yarn build
       - run: echo "🍏 This job's status is ${{ job.status }}."
