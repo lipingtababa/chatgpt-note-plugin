@@ -1,18 +1,18 @@
 {
     "schema_version": "v1",
-    "name_for_human": "TODO list",
-    "name_for_model": "todo",
-    "description_for_human": "Plugin for managing a TODO list. You can add, update, remove and view your TODOs.",
-    "description_for_model": "Plugin for managing a TODO list. You can add, update, remove and view your TODOs.",
+    "name_for_human": "Assistant Ma",
+    "name_for_model": "Assistant Ma: Todo List Manager",
+    "description_for_human": "Your AI Assistant.",
+    "description_for_model": "Plugin to PUT, POST, DELETE and GET TODOs.",
     "auth": {
         "type": "none"
     },
     "api": {
         "type": "openapi",
-        "url": "https://whatisvercelanyway.vercel.app/openapi.yaml",
+        "url": "https://magong.se/openapi.yaml",
         "is_user_authenticated": false
     },
-    "logo_url": "https://whatisvercelanyway.vercel.app/logo.png",
+    "logo_url": "https://magong.se/logo.png",
     "contact_email": "support@magong.se",
-    "legal_info_url": "https://whatisvercelanyway.vercel.app/legal.md"
+    "legal_info_url": "https://magong.se/legal.md"
 }
