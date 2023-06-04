@@ -90,16 +90,16 @@ components:
                 type: number
               msg:
                 type: string
-              priority:
-                type: string
+              done:
+                type: boolean
     addTodoRequest:
       type: object
       description: A todo
       properties:
         msg:
           type: string
-        priority:
-          type: string
+        done:
+          type: boolean
     updateTodoRequest:
       type: object
       description: A todo
@@ -109,5 +109,5 @@ components:
           required: true
         msg:
           type: string
-        priority:
-          type: string
+        done:
+          type: boolean
