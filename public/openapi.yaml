@@ -98,8 +98,10 @@ components:
       properties:
         msg:
           type: string
+          required: true
         done:
           type: boolean
+          required: true
     updateTodoRequest:
       type: object
       description: A todo
@@ -109,5 +111,7 @@ components:
           required: true
         msg:
           type: string
+          required: true
         done:
           type: boolean
+          required: true
