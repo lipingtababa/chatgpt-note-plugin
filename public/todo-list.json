@@ -1,21 +1,22 @@
 [
     {
-        "msg": "buy milk", 
-        "done": false,
+        "msg": "buy milk, can do it tomorrow", 
         "id": 1
     },
     {
-        "msg": "walk the dog", 
-        "done": false,
-        "id": 2},
+        "msg": "walk the dog in the evening", 
+        "id": 2
+    },
     {
-        "msg": "take kids to swimming", 
-        "done": false,
+        "msg": "take kids to swimming, should do it", 
         "id": 3
     },
     {
-        "msg": "learn how to use next", 
-        "done": false,
+        "msg": "pick up twins from school",
+        "id": 5
+    },
+    {
+        "msg": "learn how to use next, can do it next week", 
         "id":4
     }
 ]

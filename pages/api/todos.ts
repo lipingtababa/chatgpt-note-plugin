@@ -1,6 +1,6 @@
 import { get } from 'http'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Todo, TodoError, TodoSchema } from './types'
+import { Todo, TodoError, TodoSchema, TodosSchema } from './types'
 import { getTodosFromStorage, saveTodosToStorage } from './storageS3'
 import { normalizeId } from './utils'
 import { valid } from 'joi'
@@ -68,9 +68,9 @@ async function handlePut(req: NextApiRequest, res: NextApiResponse) {
       return todo
     })
 
-    saveTodosToStorage(updatedData)
+    const ret = await saveTodosToStorage(updatedData)
 
-    res.status(200).json(updatedData)
+    res.status(200).json(ret)
   } catch (error) {
     console.error('Error:', error)
     res.status(error instanceof TodoError ? error.statusCode : 500).json(error)
@@ -93,9 +93,9 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse) {
     req.body.id = maxID + 1
     data.push(req.body)
 
-    saveTodosToStorage(data)
+    const ret = await saveTodosToStorage(data)
 
-    res.status(200).json(data || [])
+    res.status(200).json(ret)
   } catch (error) {
     console.error('Error:', error)
     res.status(error instanceof TodoError ? error.statusCode : 500).json(error)
@@ -111,9 +111,9 @@ async function handleDelete(req: NextApiRequest, res: NextApiResponse) {
     const updatedData = data.filter((todo) => todo.id !== targetId)
 
     // save updated todo list to S3 and return to client
-    await saveTodosToStorage(updatedData)
+    const ret = await saveTodosToStorage(updatedData)
 
-    res.status(200).json(updatedData || [])
+    res.status(200).json(ret)
   } catch (error) {
     console.error('Error:', error)
     res.status(error instanceof TodoError ? error.statusCode : 500).json(error)

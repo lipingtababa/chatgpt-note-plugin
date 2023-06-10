@@ -3,12 +3,10 @@ import Joi from 'joi'
 export class Todo {
   id: number
   msg: string
-  done: boolean
 
-  constructor(id: number, msg: string, done: boolean) {
+  constructor(id: number, msg: string) {
     this.id = id
     this.msg = msg
-    this.done = done
   }
 }
 
@@ -21,9 +19,8 @@ export class TodoError extends Error {
 }
 
 export const TodoSchema = Joi.object({
-  id: Joi.number().messages({
-    'number.base': `"id" must be a number`
-  }),
-  msg: Joi.string().required(),
-  done: Joi.boolean().required()
+  id: Joi.number(),
+  msg: Joi.string().required()
 })
+
+export const TodosSchema = Joi.array().items(TodoSchema)

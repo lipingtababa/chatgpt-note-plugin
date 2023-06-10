@@ -2,13 +2,14 @@ openapi: 3.0.1
 info:
   title: TODO Plugin
   description: A plugin that allows the user to create and manage a TODO list using ChatGPT.
-  version: '0.3.0'
+  version: '0.3.1'
 servers:
   - url: https://magong.se
+    description: Production server
 paths:
   /api/todos:
     get:
-      operationId: getTodos
+      operationId: getTodoList
       summary: Get the list of todos or a specific todo
       parameters:
         - name: id
@@ -24,8 +25,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/getTodosResponse'
     post:
-      operationId: addTodo
-      summary: Add a todo
+      operationId: addOneTodo
+      summary: Add a todo, without an id
       requestBody:
         content:
           application/json:
@@ -39,8 +40,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/getTodosResponse'
     delete:
-      operationId: deleteTodo
-      summary: Delete a todo
+      operationId: deleteOneTodo
+      summary: Delete a todo by id
       parameters:
         - name: id
           in: query
@@ -55,8 +56,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/getTodosResponse'
     put:
-      operationId: updateTodo
-      summary: Update a todo
+      operationId: updateOneTodo
+      summary: Update a todo by id
       parameters:
         - name: id
           in: query
@@ -90,28 +91,20 @@ components:
                 type: number
               msg:
                 type: string
-              done:
-                type: boolean
     addTodoRequest:
       type: object
-      description: A todo
+      description: A todo without an id
       properties:
         msg:
           type: string
           required: true
-        done:
-          type: boolean
-          required: true
     updateTodoRequest:
       type: object
-      description: A todo
+      description: A full todo
       properties:
         id:
           type: number
           required: true
         msg:
           type: string
-          required: true
-        done:
-          type: boolean
           required: true

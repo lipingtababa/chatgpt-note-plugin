@@ -1,5 +1,5 @@
 import { Todo, TodoError } from './types'
-import { s3Params } from './conf'
+import { s3Params, STORAGE_REGION } from './conf'
 import AWS from 'aws-sdk'
 
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID
@@ -8,7 +8,7 @@ const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
 const s3 = new AWS.S3({
   accessKeyId,
   secretAccessKey,
-  region: 'us-east-1'
+  region: STORAGE_REGION
 })
 
 async function getTodosFromStorage(id: number | null): Promise<Todo[]> {
@@ -28,11 +28,12 @@ async function getTodosFromStorage(id: number | null): Promise<Todo[]> {
   return data.filter((todo: any) => !id || todo.id === id)
 }
 
-async function saveTodosToStorage(todos: Todo[]) {
+async function saveTodosToStorage(todos: Todo[]): Promise<Todo[]> {
   const uploadedParams = Object.assign({}, s3Params, {
     Body: JSON.stringify(todos)
   })
   await s3.putObject(uploadedParams).promise()
+  return todos
 }
 
 export { getTodosFromStorage, saveTodosToStorage }

@@ -5,9 +5,10 @@ import { s3Params } from './conf'
 import { getTodosFromStorage, saveTodosToStorage } from './storageS3'
 import { Todo } from './types'
 import { get } from 'http'
+import { before } from 'node:test'
 
-const todo1 = { id: 1, msg: 'write a unit test', done: true }
-const todo2 = { id: 2, msg: 'Buy milk', done: false }
+const todo1 = { id: 1, msg: 'write a unit test' }
+const todo2 = { id: 2, msg: 'Buy milk' }
 let mockedS3File = JSON.stringify([todo1, todo2])
 
 const mockGetObject = jest.fn((param) => ({
@@ -31,11 +32,12 @@ jest.mock('aws-sdk', () => {
   }
 })
 
-describe('getTodosFromStorage', () => {
+describe('saveTodosToStorage', () => {
   it('Should save an array of todos to S3', async () => {
-    const todos = [{ id: 1, msg: 'Buy milk', done: false }]
+    const todos = [todo1, todo2]
 
-    await saveTodosToStorage(todos)
+    const ret = await saveTodosToStorage(todos)
+    expect(ret).toEqual(todos)
     expect(mockPutObject).toHaveBeenCalledWith(
       expect.objectContaining({
         Key: s3Params.Key,
@@ -43,10 +45,18 @@ describe('getTodosFromStorage', () => {
       })
     )
   })
+})
+
+describe('getTodosFromStorage', () => {
+  beforeEach(async () => {
+    mockGetObject.mockClear()
+
+    // To store the todos in mocked S3
+    const todos = [todo1, todo2]
+    await saveTodosToStorage(todos)
+  })
 
   it('Should return todos that match the id', async () => {
-    mockedS3File = JSON.stringify([todo2, todo1])
-
     const todos = await getTodosFromStorage(1)
     expect(todos).toEqual([todo1])
 
@@ -58,10 +68,8 @@ describe('getTodosFromStorage', () => {
   })
 
   it('Should returns all todos', async () => {
-    mockedS3File = JSON.stringify([todo2, todo1])
-
     const todos = await getTodosFromStorage(null)
-    expect(todos).toEqual([todo2, todo1])
+    expect(todos).toEqual([todo1, todo2])
 
     expect(mockGetObject).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -73,7 +81,7 @@ describe('getTodosFromStorage', () => {
   it('Should returns an empty list', async () => {
     mockedS3File = JSON.stringify([todo2, todo1])
 
-    const todos = await getTodosFromStorage('3')
+    const todos = await getTodosFromStorage(3)
     expect(todos).toEqual([])
 
     expect(mockGetObject).toHaveBeenCalledWith(
