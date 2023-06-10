@@ -1,7 +1,7 @@
 {
-    "schema_version": "v1",
-    "name_for_human": "Assistant Ma",
-    "name_for_model": "Assistant Ma: Todo List Manager",
+    "schema_version": "0.3.0",
+    "name_for_human": "Todo List Manager",
+    "name_for_model": "Todo List Manager",
     "description_for_human": "Your AI Assistant.",
     "description_for_model": "Plugin to PUT, POST, DELETE and GET TODOs.",
     "auth": {
