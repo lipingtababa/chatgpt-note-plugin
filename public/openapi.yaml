@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: TODO Plugin
   description: A plugin that allows the user to create and manage a TODO list using ChatGPT.
-  version: '0.3.1'
+  version: '0.3.2'
 servers:
   - url: https://magong.se
     description: Production server
@@ -31,7 +31,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/addTodoRequest'
+              $ref: '#/components/schemas/TodoRequest'
       responses:
         "200":
           description: OK
@@ -57,7 +57,7 @@ paths:
                 $ref: '#/components/schemas/getTodosResponse'
     put:
       operationId: updateOneTodo
-      summary: Update a todo by id
+      summary: Update a todo by id. You shouldn't use DELETE/POSt to update a todo.
       parameters:
         - name: id
           in: query
@@ -68,7 +68,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateTodoRequest'
+              $ref: '#/components/schemas/TodoRequest'
       responses:
         "200":
           description: OK
@@ -91,20 +91,11 @@ components:
                 type: number
               msg:
                 type: string
-    addTodoRequest:
+    TodoRequest:
       type: object
       description: A todo without an id
       properties:
         msg:
           type: string
           required: true
-    updateTodoRequest:
-      type: object
-      description: A full todo
-      properties:
-        id:
-          type: number
-          required: true
-        msg:
-          type: string
-          required: true
+
