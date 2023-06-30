@@ -22,5 +22,11 @@ export const TodoSchema = Joi.object({
   id: Joi.number(),
   msg: Joi.string().required()
 })
-
 export const TodosSchema = Joi.array().items(TodoSchema)
+
+
+export const FullTodoSchema = Joi.object({
+  id: Joi.number().required(),
+  msg: Joi.string().required()
+})
+export const FullTodosSchema = Joi.array().items(FullTodoSchema)

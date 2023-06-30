@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: TODO Plugin
   description: A plugin that allows the user to create and manage a TODO list using ChatGPT.
-  version: '0.3.2'
+  version: '0.3.3'
 servers:
   - url: https://magong.se
     description: Production server

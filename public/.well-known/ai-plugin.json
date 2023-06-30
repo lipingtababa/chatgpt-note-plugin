@@ -1,5 +1,5 @@
 {
-    "schema_version": "0.3.2",
+    "schema_version": "0.3.3",
     "name_for_human": "Todo List Manager",
     "name_for_model": "Todo List Manager",
     "description_for_human": "Your AI Assistant.",

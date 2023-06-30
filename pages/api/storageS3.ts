@@ -1,4 +1,4 @@
-import { Todo, TodoError } from './types'
+import { FullTodoSchema, Todo, TodoError } from './types'
 import { s3Params, STORAGE_REGION } from './conf'
 import AWS from 'aws-sdk'
 
@@ -25,7 +25,16 @@ async function getTodosFromStorage(id: number | null): Promise<Todo[]> {
     throw new TodoError('Error parsing data from DB', 500)
   }
 
-  return data.filter((todo: any) => !id || todo.id === id)
+  data = data.filter((todo: any)=> {
+    const { error } = FullTodoSchema.validate(todo)
+    if (error) {
+      console.error('Error:', todo, error)
+      return false
+    }
+    return true
+  })
+
+  return data.filter((todo: any) => (!id || todo.id === id) )
 }
 
 async function saveTodosToStorage(todos: Todo[]): Promise<Todo[]> {

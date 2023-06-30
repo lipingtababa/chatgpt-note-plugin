@@ -67,7 +67,7 @@ describe('getTodosFromStorage', () => {
     )
   })
 
-  it('Should returns all todos', async () => {
+  it('Should return all todos', async () => {
     const todos = await getTodosFromStorage(null)
     expect(todos).toEqual([todo1, todo2])
 
@@ -78,7 +78,7 @@ describe('getTodosFromStorage', () => {
     )
   })
 
-  it('Should returns an empty list', async () => {
+  it('Should return an empty list', async () => {
     mockedS3File = JSON.stringify([todo2, todo1])
 
     const todos = await getTodosFromStorage(3)
