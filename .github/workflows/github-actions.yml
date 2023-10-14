@@ -25,14 +25,13 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         if: ${{ always() }} 
         with:
-          role-to-assume: my-github-actions-role
+          role-to-assume: github-oidc-Role-n7fcpb7nTIJz
       - name: Amazon CodeGuru Reviewer Scanner
         if: ${{ always() }}
         uses: aws-actions/codeguru-reviewer@v1.1
         with:
           build_path: target
           s3_bucket: codeguru-reviewer-chatgpt-plugin-vercel-demo
-      
       - name: install
         run: yarn install
       - name: lint
