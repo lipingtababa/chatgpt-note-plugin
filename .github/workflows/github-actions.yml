@@ -21,16 +21,22 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - name: install
-        run: yarn install
-      - name: lint
-        run: yarn format
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        if: ${{ always() }} 
+        with:
+          role-to-assume: my-github-actions-role
       - name: Amazon CodeGuru Reviewer Scanner
         if: ${{ always() }}
         uses: aws-actions/codeguru-reviewer@v1.1
         with:
           build_path: target
           s3_bucket: codeguru-reviewer-chatgpt-plugin-vercel-demo
+      
+      - name: install
+        run: yarn install
+      - name: lint
+        run: yarn format
       - name: build
         run: yarn build
       - name: unit test 
