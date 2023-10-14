@@ -19,7 +19,7 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::234443379770:role/github-oidc-Role-n7fcpb7nTIJz
-      - name: Amazon CodeGuru Reviewer Scanner
+      - name: Amazon CodeGuru Reviewer
         if: ${{ always() }}
         uses: aws-actions/codeguru-reviewer@v1.1
         with:
