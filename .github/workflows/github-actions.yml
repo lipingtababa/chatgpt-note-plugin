@@ -12,6 +12,7 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  
   Build:
     runs-on: ubuntu-latest
     steps:
@@ -24,6 +25,11 @@ jobs:
         run: yarn install
       - name: lint
         run: yarn format
+      - name: Amazon CodeGuru Reviewer Scanner
+        if: ${{ always() }}
+        uses: aws-actions/codeguru-reviewer@v1.1
+        with:
+          s3_bucket: codeguru-reviewer-chatgpt-plugin-vercel-demo
       - name: build
         run: yarn build
       - name: unit test 
