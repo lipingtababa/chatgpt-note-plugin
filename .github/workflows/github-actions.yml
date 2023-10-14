@@ -25,6 +25,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         if: ${{ always() }} 
         with:
+          aws-region: us-east-1
           role-to-assume: github-oidc-Role-n7fcpb7nTIJz
       - name: Amazon CodeGuru Reviewer Scanner
         if: ${{ always() }}
