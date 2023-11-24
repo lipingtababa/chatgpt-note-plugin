@@ -10,20 +10,6 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        if: ${{ always() }} 
-        with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::234443379770:role/github-oidc-Role-n7fcpb7nTIJz
-      - name: Amazon CodeGuru Reviewer
-        if: ${{ always() }}
-        uses: aws-actions/codeguru-reviewer@v1.1
-        with:
-          s3_bucket: codeguru-reviewer-chatgpt-plugin-vercel-demo
       - name: install
         run: yarn install
       - name: lint
