@@ -9,14 +9,6 @@ Since ChatGPT Plugins is not actively maintained by OpenAI, this project is disc
 - The Key is declaring these APIs precisely in [OpenAPI Specification](./pages/public/openapi.yaml).
 - The commentary summary in the OpenAPI Specification is crucial as it affects the behaviour of ChatGPT Plugins just like it affects behaviours of a human being.
 
-# Installation
-Before running this app, you should
-- upload ./public/todo-list.json to s3://<TODOS_BUCKET>/<TODOS_KEY>
-- configure TODOS_BUCKET and TODOS_KEY as environment variables
-- configure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as environment variables
-- Follow the [OpenAI ChatGPT Plugins Doc](https://platform.openai.com/docs/plugins/introduction)
-
-
 # Development
 ## Unit test
 ```bash
@@ -29,3 +21,15 @@ yarn dev
 ```
 
 For details, check [package.json](./package.json)
+
+
+# Installation
+## Prerequisite
+Before running this app, you should
+- upload ./public/todo-list.json to s3://<TODOS_BUCKET>/<TODOS_KEY>
+- configure TODOS_BUCKET and TODOS_KEY as environment variables
+- configure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as environment variables
+- Follow the [OpenAI ChatGPT Plugins Doc](https://platform.openai.com/docs/plugins/introduction)
+
+## Installation on Vercel
+Every change would trigger a rebuild and a redeployment to [verceldemo project](https://vercel.com/lipingtababa/verceldemo/), which is also with the domain [magong.se](https://magong.se), through [Github Actions](./.github/workflows/github-actions.yml)
